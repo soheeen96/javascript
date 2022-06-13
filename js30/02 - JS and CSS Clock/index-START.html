@@ -16,6 +16,43 @@
     </div>
 
 
+    <div id="clock"></div>
+
+    <script>
+      window.addEventListener('DOMContentLoaded',function(){
+        const dt = new Date();
+
+        const funcTime = function(){
+          const dt = new Date();
+          var hh = dt.getHours();	
+          var mm = dt.getMinutes();	
+          var ss = dt.getSeconds();
+
+          document.querySelector('#clock').innerHTML = hh + ':' + mm + ':' + ss;
+        }
+
+        const analogTime = function(){
+          const dt2 = new Date();
+          var hh = dt2.getHours();	
+          var mm = dt2.getMinutes();	
+          var ss = dt2.getSeconds();
+
+          var degH = (360 / 12) * hh; 
+          var degM = (360 / 60) * mm; 
+          var degS = (360 / 60) * ss; 
+
+          document.querySelector('.hour-hand').style.transform = "rotate("+ degH + "deg)";
+          document.querySelector('.min-hand').style.transform = "rotate("+ degM + "deg)";
+          document.querySelector('.second-hand').style.transform = "rotate("+ degS + "deg)";
+        }
+        
+        setInterval(analogTime, 1000) //초  밀리초
+
+        analogTime();
+      });
+    </script>
+
+
   <style>
     html {
       background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
@@ -53,7 +90,7 @@
       position: relative;
       width: 100%;
       height: 100%;
-      transform: translateY(-3px); /* account for the height of the clock hands */
+      transform: translateY(-3px) rotate(90deg); /* account for the height of the clock hands */
     }
 
     .hand {
@@ -63,6 +100,9 @@
       position: absolute;
       top: 50%;
     }
+    .hour-hand {transform-origin: right;} 
+    .min-hand { transform-origin: right;} 
+    .second-hand {transform-origin: right;} 
 
   </style>
 
